@@ -9,3 +9,6 @@
 - - outputs new file "truncate_truecrypt.tc"
 - - hashcat -m 6211 -a 0 truncate_truecrypt.tc cyclone_hk_v2.txt -r cyclone_250.rule
 - Tool will not overwrite any existing files
+
+Compile from source code info:
+- https://github.com/cyclone-github/scripts/blob/main/intro_to_go.txt
