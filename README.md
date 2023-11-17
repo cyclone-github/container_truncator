@@ -4,10 +4,10 @@
 - Run tool in directory where Truecrypt *.tc or Veracrypt *.vc container file is located
 - Once file is selected from menu, tool will truncate container and save a new file to "truncate_filename"
 - "truncate_filename" can now be ran with hashcat using the appropriate mode
-- - example: ./veracrypt_container_truncator.bin
-- - 1 ) truecrypt.tc
-- - outputs new file "truncate_truecrypt.tc"
-- - hashcat -m 6211 -a 0 truncate_truecrypt.tc cyclone_hk_v2.txt -r cyclone_250.rule
+  - example: ./veracrypt_container_truncator.bin
+  - 1 ) truecrypt.tc
+  - outputs new file "truncate_truecrypt.tc"
+  - hashcat -m 6211 -a 0 truncate_truecrypt.tc cyclone_hk_v2.txt -r cyclone_250.rule
 - Tool will not overwrite any existing files
 
 Compile from source code info:
