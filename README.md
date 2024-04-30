@@ -1,3 +1,5 @@
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=cyclone-github&repo=container_truncator&theme=gruvbox)](https://github.com/cyclone-github/)
+
 ### Cyclone's Truecrypt / Veracrypt Container Truncater
 - Tool to process Truecrypt / Veracrypt container files to be ran with hashcat
 - Tested on debian linux & Windows 11
