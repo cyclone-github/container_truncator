@@ -1,4 +1,10 @@
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=cyclone-github&repo=container_truncator&theme=gruvbox)](https://github.com/cyclone-github/)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=cyclone-github&repo=container_truncator&theme=gruvbox)](https://github.com/cyclone-github/container_truncator/)
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/cyclone-github/container_truncator)](https://goreportcard.com/report/github.com/cyclone-github/container_truncator)
+[![GitHub issues](https://img.shields.io/github/issues/cyclone-github/container_truncator.svg)](https://github.com/cyclone-github/container_truncator/issues)
+[![License](https://img.shields.io/github/license/cyclone-github/container_truncator.svg)](LICENSE)
+[![GitHub release](https://img.shields.io/github/release/cyclone-github/container_truncator.svg)](https://github.com/cyclone-github/container_truncator/releases)
+[![Go Reference](https://pkg.go.dev/badge/github.com/cyclone-github/container_truncator.svg)](https://pkg.go.dev/github.com/cyclone-github/container_truncator)
 
 ### Cyclone's Truecrypt / Veracrypt Container Truncater
 - Tool to process Truecrypt / Veracrypt container files to be ran with hashcat
