@@ -1,4 +1,4 @@
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=cyclone-github&repo=container_truncator&theme=gruvbox)](https://github.com/cyclone-github/container_truncator/)
+[![Readme Card](https://github-readme-stats-fast.vercel.app/api/pin/?username=cyclone-github&repo=container_truncator&theme=gruvbox)](https://github.com/cyclone-github/container_truncator/)
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/cyclone-github/container_truncator)](https://goreportcard.com/report/github.com/cyclone-github/container_truncator)
 [![GitHub issues](https://img.shields.io/github/issues/cyclone-github/container_truncator.svg)](https://github.com/cyclone-github/container_truncator/issues)
@@ -17,6 +17,15 @@
   - outputs new file "truncate_truecrypt.tc"
   - hashcat -m 6211 -a 0 truncate_truecrypt.tc cyclone_hk_v2.txt -r cyclone_250.rule
 - Tool will not overwrite any existing files
+
+### Install latest release:
+```
+go install github.com/cyclone-github/container_truncator@latest
+```
+### Install from latest source code (bleeding edge):
+```
+go install github.com/cyclone-github/container_truncator@main
+```
 
 ### Compile from source:
 - If you want the latest features, compiling from source is the best option since the release version may run several revisions behind the source code.
