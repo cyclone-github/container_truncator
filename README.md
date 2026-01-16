@@ -6,13 +6,13 @@
 [![GitHub release](https://img.shields.io/github/release/cyclone-github/container_truncator.svg)](https://github.com/cyclone-github/container_truncator/releases)
 [![Go Reference](https://pkg.go.dev/badge/github.com/cyclone-github/container_truncator.svg)](https://pkg.go.dev/github.com/cyclone-github/container_truncator)
 
-### Cyclone's Truecrypt / Veracrypt Container Truncater
-- Tool to process Truecrypt / Veracrypt container files to be ran with hashcat
+### Cyclone's Container Truncater
+- Tool to truncate BestCrypt / Truecrypt / Veracrypt container files
 - Tested on debian linux & Windows 11
-- Run tool in directory where Truecrypt *.tc or Veracrypt *.vc container file is located
+- Run tool in directory where BestCrypt *.jbc, Truecrypt *.tc or Veracrypt *.vc container file is located
 - Once file is selected from menu, tool will truncate container and save a new file to "truncate_filename"
-- "truncate_filename" can now be ran with hashcat using the appropriate mode
-  - example: ./veracrypt_container_truncator.bin
+- "truncate_filename" can now be ran with hashcat using the appropriate mode (for tc/vc containers)
+  - example: ./container_truncator.bin
   - 1 ) truecrypt.tc
   - outputs new file "truncate_truecrypt.tc"
   - hashcat -m 6211 -a 0 truncate_truecrypt.tc cyclone_hk_v2.txt -r cyclone_250.rule
