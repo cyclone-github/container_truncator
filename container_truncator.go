@@ -11,7 +11,7 @@ import (
 )
 
 // version
-var version = "v1.0.0, 2026-01-16\nhttps://github.com/cyclone-github/container_truncator"
+var version = "v1.0.1, 2026-01-16\nhttps://github.com/cyclone-github/container_truncator"
 
 func versionFunc() {
 	fmt.Fprintln(os.Stderr, version)
@@ -19,7 +19,7 @@ func versionFunc() {
 
 func welcome() {
 	fmt.Println(" ----------------------------------- ")
-	fmt.Println("|   Cyclone's Container Truncator   |")
+	fmt.Println("|   Cyclone's Container Truncater   |")
 	fmt.Println("| Bestcrypt / Truecrypt / Veracrypt |")
 	fmt.Println(" ----------------------------------- ")
 	fmt.Println(version)
@@ -101,7 +101,7 @@ func truncate() {
 	// determine header size based on container type
 	var headerSize int64 = 512 // default for .tc / .vc
 	if strings.HasSuffix(strings.ToLower(inputFile), ".jbc") {
-		headerSize = 1536 // default for BestCrypt v8/9
+		headerSize = 4096 // BestCrypt v8/9
 	}
 
 	// copy header bytes from input file to output file
