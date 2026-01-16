@@ -1,65 +1,52 @@
 package main
 
 import (
+	"encoding/base64"
+	"flag"
 	"fmt"
 	"io"
 	"os"
-	"os/exec"
 	"path/filepath"
-	"runtime"
 	"strings"
-	"time"
 )
 
-// version history
-var version = "v0.1.0, 2023-01-23; initial release"
+// version
+var version = "v1.0.0, 2026-01-16\nhttps://github.com/cyclone-github/container_truncator"
 
-// clear screen function
-func clearScreen() {
-	switch runtime.GOOS {
-	case "linux":
-		cmd := exec.Command("clear")
-		cmd.Stdout = os.Stdout
-		cmd.Run()
-	case "darwin":
-		cmd := exec.Command("clear")
-		cmd.Stdout = os.Stdout
-		cmd.Run()
-		fmt.Println("Note, program has not been tested on Mac OS")
-		time.Sleep(5 * time.Second)
-	case "windows":
-		cmd := exec.Command("cmd", "/c", "cls")
-		cmd.Stdout = os.Stdout
-		cmd.Run()
-	}
+func versionFunc() {
+	fmt.Fprintln(os.Stderr, version)
 }
 
 func welcome() {
-	fmt.Println(" ----------------------- ")
-	fmt.Println("|       Cyclone's       |")
-	fmt.Println("| Truecrypt / Veracrypt |")
-	fmt.Println("|  Container Truncater  |")
-	fmt.Println(" ----------------------- ")
+	fmt.Println(" ----------------------------------- ")
+	fmt.Println("|   Cyclone's Container Truncater   |")
+	fmt.Println("| Bestcrypt / Truecrypt / Veracrypt |")
+	fmt.Println(" ----------------------------------- ")
 	fmt.Println(version)
 	fmt.Println()
-	fmt.Println("Program will truncate a Truecrypt or Veracrypt Container")
-	fmt.Println("and save a new file as 'truncated_orginal_filename'.")
-	fmt.Println("You can then run this file with hashcat.")
-	fmt.Println("Program only supports .tc & .vc container files.")
+	fmt.Println("Program will truncate a Bestcrypt, Truecrypt or Veracrypt Container")
+	fmt.Println("and save a new file as 'truncated_orginal_filename'")
+	fmt.Println("You can then run .tc & .vc files with hashcat")
+	fmt.Println("Program only supports .jbc .tc & .vc container files")
 	fmt.Println()
 }
 
 func truncate() {
-	// Get all files in current directory with .tc or .vc extension
-	files, err := filepath.Glob("*.tc")
-	files2, err := filepath.Glob("*.vc")
-	files = append(files, files2...)
-	if err != nil {
-		fmt.Println("Error:", err)
-		return
+	// get all supported container files in current dir
+	extensions := []string{".jbc", ".tc", ".vc"}
+	var files []string
+
+	for _, ext := range extensions {
+		matches, err := filepath.Glob("*" + ext)
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+		files = append(files, matches...)
 	}
+
 	if len(files) == 0 {
-		fmt.Println("No files found with extension .tc or .vc")
+		fmt.Println("No files found with extension .jbc .tc or .vc")
 		return
 	}
 
@@ -75,7 +62,7 @@ func truncate() {
 		return
 	}
 
-	// Print list of files and ask user to select one
+	// print list of files and prompt user to select one
 	fmt.Println("Select a container file to truncate:")
 	for i, file := range truncatedFiles {
 		fmt.Printf("%d) %s\n", i+1, file)
@@ -83,19 +70,19 @@ func truncate() {
 	var selected int
 	fmt.Scan(&selected)
 
-	// Get selected file
+	// get selected file
 	inputFile := truncatedFiles[selected-1]
 
-	// Get output file name by prepending "_truncate" to input file name
+	// get output file name by prepending "_truncate" to input file name
 	outputFile := "truncate_" + inputFile
 
-	// Check if output file already exists
+	// check if output file already exists
 	if _, err := os.Stat(outputFile); !os.IsNotExist(err) {
 		fmt.Println("Error: Output file already exists.")
 		return
 	}
 
-	// Open input file
+	// open input file
 	in, err := os.Open(inputFile)
 	if err != nil {
 		fmt.Println("Error:", err)
@@ -103,7 +90,7 @@ func truncate() {
 	}
 	defer in.Close()
 
-	// Open output file
+	// open output file
 	out, err := os.Create(outputFile)
 	if err != nil {
 		fmt.Println("Error:", err)
@@ -111,8 +98,15 @@ func truncate() {
 	}
 	defer out.Close()
 
-	// Copy 512 bytes from input file to output file
-	_, err = io.CopyN(out, in, 512)
+	// determine header size based on container type
+	var headerSize int64 = 512 // default for .tc / .vc
+	if strings.HasSuffix(strings.ToLower(inputFile), ".jbc") {
+		headerSize = 1536 // default for BestCrypt v8/9
+	}
+
+	// copy header bytes from input file to output file
+	_, err = io.CopyN(out, in, headerSize)
+
 	if err != nil {
 		fmt.Println("Error:", err)
 	} else {
@@ -121,7 +115,30 @@ func truncate() {
 }
 
 func main() {
-	clearScreen()
+	version := flag.Bool("version", false, "Program version:")
+	cyclone := flag.Bool("cyclone", false, "dev info")
+	help := flag.Bool("help", false, "Prints help:")
+	flag.Parse()
+
+	// run sanity checks for special flags
+	if *version {
+		versionFunc()
+		os.Exit(0)
+	}
+	if *cyclone {
+		decodedStr, err := base64.StdEncoding.DecodeString("Q29kZWQgYnkgY3ljbG9uZSA7KQo=")
+		if err != nil {
+			fmt.Fprintln(os.Stderr, "--> Cannot decode base64 string. <--")
+			os.Exit(1)
+		}
+		fmt.Fprintln(os.Stderr, string(decodedStr))
+		os.Exit(0)
+	}
+	if *help {
+		welcome()
+		os.Exit(0)
+	}
+
 	welcome()
 	truncate()
 }
