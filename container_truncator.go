@@ -19,7 +19,7 @@ func versionFunc() {
 
 func welcome() {
 	fmt.Println(" ----------------------------------- ")
-	fmt.Println("|   Cyclone's Container Truncater   |")
+	fmt.Println("|   Cyclone's Container Truncator   |")
 	fmt.Println("| Bestcrypt / Truecrypt / Veracrypt |")
 	fmt.Println(" ----------------------------------- ")
 	fmt.Println(version)

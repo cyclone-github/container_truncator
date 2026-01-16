@@ -6,7 +6,7 @@
 [![GitHub release](https://img.shields.io/github/release/cyclone-github/container_truncator.svg)](https://github.com/cyclone-github/container_truncator/releases)
 [![Go Reference](https://pkg.go.dev/badge/github.com/cyclone-github/container_truncator.svg)](https://pkg.go.dev/github.com/cyclone-github/container_truncator)
 
-### Cyclone's Container Truncater
+### Cyclone's Container Truncator
 - Tool to truncate BestCrypt / Truecrypt / Veracrypt container files
 - Tested on debian linux & Windows 11
 - Run tool in directory where BestCrypt *.jbc, Truecrypt *.tc or Veracrypt *.vc container file is located
